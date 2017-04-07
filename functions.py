@@ -39,6 +39,7 @@ class _symbolic_object:
         
     def to_sympy(self):
         raise NotImplementedError("Conversion to sympy not supported.")
+        
 
 class literal(_symbolic_object):
     def __init__(self, value):
@@ -281,3 +282,9 @@ ln.partials = [lambda x: power(x, literal("-1"))]
 #define exponentiation
 def power(x, y):
     return exp(multiply(y, ln(x)))
+
+
+def reset():
+    _symbolic_object._tokens = []
+    _function._functions = {}
+        
