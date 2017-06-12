@@ -84,9 +84,10 @@ class LaxPair:
         return sympy.simplify(sympy.expand(expression))
     
 class GenerateLax:
-    def __init__(self, fname, tout=60):
+    def __init__(self, fname, tout=60, autoStart=True):
         self.tout = tout
         self.fname = fname
+        self.autoStart = autoStart
     
         self.constants = None
         self.x = None
@@ -100,6 +101,9 @@ class GenerateLax:
         self.num_args_distribution = numpy.array([8, 4, 2, 1])
         
         self._reset()
+        
+        if self.autoStart:
+            self.findPairs()
 
     def findLaxPair(self):
         self._reset()
@@ -170,6 +174,3 @@ class GenerateLax:
 
         self.L_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":5, "partial_t":0, "constant":0}
         self.A_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":3, "partial_t":10, "constant":6}
-
-#generator = GenerateLax("NPDE.dat", 60)
-#generator.findPairs()
