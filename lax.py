@@ -8,13 +8,6 @@
 #        by solving Lf=\lambda f when \lambda and f are known.
 #4.  repeat step (3) untill t=t2, then compute U(t2) and return.
 
-#note that depending on the structure of L, there may be multiple solutions for U(t).
-#   all solutions for U(t) from solving L with know eigenfunctions should also solve the NPDE.   
-
-#note2 it may be posible to add a third equation to replace \partial_t \lambda = 0.
-
-# investigate applications of the LAX equations to multidimesional problems and to linear PDEs
-
 import sympy
 import numpy
 
@@ -36,23 +29,14 @@ class LaxPair:
         self.LAX = None
         self.PDE = None
         
+        self.msg = ""
+        
         if tout is None:
             tout = 0
 
                 
-        #LAX
-#        self.commutator_t = operators.commutator(operators.partial(self.t), self.L)
-#        self.commutator_A = operators.commutator(self.L, self.A)
-        # partial_t^2 \psi = A\psi
-#        self.commutator_t = operators.commutator(operators.partial(self.t)(operators.partial(self.x)), self.L)
-#        self.commutator_A = operators.commutator(self.L, self.A)
-        #LAX
-#        self.commutator_t = operators.commutator(operators.partial(self.t)(operators.partial(self.t)), self.L)
-#        self.commutator_A = operators.commutator(self.L, operators.add(operators.commutator(operators.partial(self.t), self.A), self.A(self.A)))
-
-#        self.LAX = operators.add(self.commutator_t, self.commutator_A)
-        #only comment temporaily ----- READ THIS ------
         self.LAX = operators.commutator(self.L, self.A)
+
         try:
             self.f = functions.function("f", 2)(self.x, self.t)        
         except ValueError:
@@ -91,15 +75,18 @@ class LaxPair:
                 raise LaxError("All compatible PDEs are trivially zero.")
             
         self.PDE = PDE
+        self.msg = "PDEs found: [\n" + ",\n\n".join([str(P[0]) + ";\n" + str(P[1]) + ";\n" + str(P[2]) for P in self.PDE]) + "\n]"
 
-        print("PDEs found: [\n" + ",\n\n".join([str(P[0]) + ";\n" + str(P[1]) + ";\n" + str(P[2]) for P in self.PDE]) + "\n]")
+    def get_msg(self):
+        return self.msg
 
     def _simplify(self, expression):
         return sympy.simplify(sympy.expand(expression))
-
+    
 class GenerateLax:
-    def __init__(self, tout=60):
+    def __init__(self, fname, tout=60):
         self.tout = tout
+        self.fname = fname
     
         self.constants = None
         self.x = None
@@ -130,7 +117,9 @@ class GenerateLax:
     def findPairs(self):
         while True:
             try:
-                self.findLaxPair()
+                laxpair = self.findLaxPair()
+                with open(self.fname, "a") as fout:
+                    fout.write(laxpair.get_msg())
             except (LaxError, TimeoutError, KeyError):
                 continue
 
@@ -182,5 +171,5 @@ class GenerateLax:
         self.L_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":5, "partial_t":0, "constant":0}
         self.A_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":3, "partial_t":10, "constant":6}
 
-generator = GenerateLax(60)
+generator = GenerateLax("NPDE.dat", 60)
 generator.findPairs()
