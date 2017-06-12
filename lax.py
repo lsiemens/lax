@@ -171,5 +171,5 @@ class GenerateLax:
         self.L_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":5, "partial_t":0, "constant":0}
         self.A_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":3, "partial_t":10, "constant":6}
 
-generator = GenerateLax("NPDE.dat", 60)
-generator.findPairs()
+#generator = GenerateLax("NPDE.dat", 60)
+#generator.findPairs()
