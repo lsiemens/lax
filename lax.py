@@ -84,10 +84,11 @@ class LaxPair:
         return sympy.simplify(sympy.expand(expression))
     
 class GenerateLax:
-    def __init__(self, fname, tout=60, autoStart=True):
+    def __init__(self, fname, tout=60, autoStart=True, seed=None):
         self.tout = tout
         self.fname = fname
         self.autoStart = autoStart
+        self.seed = seed
     
         self.constants = None
         self.x = None
@@ -99,6 +100,11 @@ class GenerateLax:
         self.L_operator_distribution = {}
         self.A_operator_distribution = {}
         self.num_args_distribution = numpy.array([8, 4, 2, 1])
+
+        if self.seed is None:
+            numpy.random.seed()
+        else:
+            numpy.random.seed(self.seed)
         
         self._reset()
         
@@ -110,7 +116,6 @@ class GenerateLax:
         with timeout.timeout(self.tout):
             L = self._generateOperator(self.L_operator_distribution)
             A = self._generateOperator(self.A_operator_distribution)
-        
         try:
             laxpair = LaxPair(L, A, self.constants, self.x, self.t, self.tout)
         except NotImplementedError:
