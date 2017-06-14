@@ -179,3 +179,18 @@ class GenerateLax:
 
         self.L_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":5, "partial_t":0, "constant":0}
         self.A_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":3, "partial_t":10, "constant":6}
+
+def GenerateLaxHandler(dumpName, *args, **kwargs):
+    try:
+        print(dumpName)
+        if dumpName == "TEST_NPDE1.stktrc":
+            import time
+            time.sleep(10)
+            raise ValueError("TestError")
+        return GenerateLax(*args, **kwargs)
+    except KeyboardInterrupt:
+        pass
+    except Exception as E:
+        with open(dumpName, "w") as fout:
+            fout.write("process terminated with exception")
+            #in future try to print out the stacktrace
