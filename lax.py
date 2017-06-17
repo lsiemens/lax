@@ -14,6 +14,7 @@ import numpy
 import timeout
 import functions
 import operators
+import traceback
 
 class LaxError(Exception):
     pass
@@ -182,15 +183,9 @@ class GenerateLax:
 
 def GenerateLaxHandler(dumpName, *args, **kwargs):
     try:
-        print(dumpName)
-        if dumpName == "TEST_NPDE1.stktrc":
-            import time
-            time.sleep(10)
-            raise ValueError("TestError")
         return GenerateLax(*args, **kwargs)
     except KeyboardInterrupt:
         pass
     except Exception as E:
         with open(dumpName, "w") as fout:
-            fout.write("process terminated with exception")
-            #in future try to print out the stacktrace
+            fout.write(traceback.format_exc())

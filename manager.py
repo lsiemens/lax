@@ -22,7 +22,7 @@ class manager:
         while True:
             terminated_ids = []
             for process, id in self.jobs:
-                if os.path.isfile(self.fname_base + str(id) + ".stktrc"):
+                if not process.is_alive():
                     terminated_ids.append(id)
         
             self.jobs = [(process, id) for process, id in self.jobs if id not in terminated_ids]
