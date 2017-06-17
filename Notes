@@ -1,0 +1,4 @@
+6-16-2017
+During the first test on EC2 compute oriented mechines (C4.large) one of the processes entered a Zombie state
+after 336 minutes, No ".stktrc" file was generated.
+

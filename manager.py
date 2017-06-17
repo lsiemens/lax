@@ -39,5 +39,5 @@ class manager:
 
             time.sleep(self.status_check)
 
-laxManager = manager("TEST_NPDE", 2)
+laxManager = manager("/data/lsiemens/NPDE_C4_large", 2)
 laxManager.start()
