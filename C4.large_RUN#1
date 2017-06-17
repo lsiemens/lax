@@ -1,0 +1,9 @@
+EC2 C4.large runing for combined time of 8.5hours, with one solution every 21 minutes
+
+Interesting solution
+
+PDEs found: [
+f(x, t)*u(x, t);
+c1*f_1(x, t) + c2*f_0(x, t) + c3*f(x, t)*u_11(x, t) + c3*f_1(x, t)*u_1(x, t);
+-c1*u_1(x, t) - c2*u_0(x, t) - c3*u_1(x, t)**2
+]
