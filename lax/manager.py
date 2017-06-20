@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-import lax
+import lax.lax
 
 import os
 import time
@@ -35,7 +35,7 @@ class manager:
                 print(fname)
                 print(dname)
                 process_seed = int(init_seed + jobid)
-                process = multiprocessing.Process(target=lax.GenerateLaxHandler, args=(dname, ), kwargs={"fname":fname, "seed":process_seed})
+                process = multiprocessing.Process(target=lax.lax.GenerateLaxHandler, args=(dname, ), kwargs={"fname":fname, "seed":process_seed})
                 self.jobs.append((process, jobid))
                 process.start()
                 jobid += 1

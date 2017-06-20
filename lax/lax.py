@@ -10,11 +10,11 @@
 
 import sympy
 import numpy
-
-import timeout
-import functions
-import operators
 import traceback
+
+import lax.timeout
+import lax.functions
+import lax.operators
 
 class LaxError(Exception):
     pass
@@ -36,14 +36,14 @@ class LaxPair:
             tout = 0
 
                 
-        self.LAX = operators.commutator(self.L, self.A)
+        self.LAX = lax.operators.commutator(self.L, self.A)
 
         try:
-            self.f = functions.function("f", 2)(self.x, self.t)        
+            self.f = lax.functions.function("f", 2)(self.x, self.t)        
         except ValueError:
             raise RuntimeError('The token "f" is already in use and cannot be defined by LaxPair.')
 
-        with timeout.timeout(tout):
+        with lax.timeout.timeout(tout):
             LAXf = self._simplify(self.LAX(self.f).to_sympy())
             PDE = [self._simplify(LAXf.coeff(value.to_sympy())) for key, value in self.f.derived_functions().items() if "_" not in key]
             if len(PDE) == 1:
@@ -114,7 +114,7 @@ class GenerateLax:
 
     def findLaxPair(self):
         self._reset()
-        with timeout.timeout(self.tout):
+        with lax.timeout.timeout(self.tout):
             L = self._generateOperator(self.L_operator_distribution)
             A = self._generateOperator(self.A_operator_distribution)
         try:
@@ -160,22 +160,22 @@ class GenerateLax:
                 return operator["function"]
     
     def _new_constant(self):
-        const = functions.constant("c" + str(len(self.constants) + 1))
+        const = lax.functions.constant("c" + str(len(self.constants) + 1))
         self.constants.append(const)
-        return operators.multiply(const)
+        return lax.operators.multiply(const)
         
     def _reset(self):
-        functions.reset()
+        lax.functions.reset()
         self.constants = []
-        self.x = functions.variable("x")
-        self.t = functions.variable("t")
-        self.u = functions.function("u", 2)(self.x, self.t)
+        self.x = lax.functions.variable("x")
+        self.t = lax.functions.variable("t")
+        self.u = lax.functions.function("u", 2)(self.x, self.t)
 
-        self.operators = {"add":{"function":operators.add, "min_args":1, "max_args":None},
-                          "commutator":{"function":operators.commutator, "min_args":2, "max_args":2},
-                          "multiply_u":{"function":operators.multiply(self.u), "min_args":0, "max_args":1},
-                          "partial_x":{"function":operators.partial(self.x), "min_args":0, "max_args":1},
-                          "partial_t":{"function":operators.partial(self.t), "min_args":0, "max_args":1},
+        self.operators = {"add":{"function":lax.operators.add, "min_args":1, "max_args":None},
+                          "commutator":{"function":lax.operators.commutator, "min_args":2, "max_args":2},
+                          "multiply_u":{"function":lax.operators.multiply(self.u), "min_args":0, "max_args":1},
+                          "partial_x":{"function":lax.operators.partial(self.x), "min_args":0, "max_args":1},
+                          "partial_t":{"function":lax.operators.partial(self.t), "min_args":0, "max_args":1},
                           "constant":{"function":self._new_constant, "min_args":1, "max_args":1}}
 
         self.L_operator_distribution = {"add":1, "commutator":2, "multiply_u":4, "partial_x":5, "partial_t":0, "constant":0}

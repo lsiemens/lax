@@ -1,8 +1,8 @@
 #! /usr/bin/env python3
 
-import functions
+import lax.functions
 
-class operator(functions._symbolic_object):
+class operator(lax.functions._symbolic_object):
     def __init__(self, token, init_callback, eval_callback, str_callback, copy_callback, *init_arguments):
         self.token = token.upper()
         self._type = "operator"
@@ -48,7 +48,7 @@ def add(*vectors):
             raise ValueError("*vectors must not be empty list.")
         self._vectors = vectors
     def _eval(self, argument):
-        return functions.add(*[vector(argument) for vector in self._vectors])
+        return lax.functions.add(*[vector(argument) for vector in self._vectors])
     def _str(self):
         ###########??????????????
         if self.argument is None:
@@ -68,7 +68,7 @@ def multiply(scaler):
             raise ValueError("scaler cannot be an operator.")
         self._scaler = scaler
     def _eval(self, argument):
-        return functions.multiply(self._scaler, argument)
+        return lax.functions.multiply(self._scaler, argument)
     def _str(self):
         if self.argument is None:
             return str(self._scaler) + ", "
@@ -101,15 +101,15 @@ def partial(variable):
     return operator("PARTIAL", _init, _eval, _str, _copy, variable)
 
 def commutator(F, G):
-    return add(F(G), multiply(functions.literal("-1"))(G(F)))
+    return add(F(G), multiply(lax.functions.literal("-1"))(G(F)))
 
-#x = functions.variable("x")
-#t = functions.variable("t")
-#u = functions.function("u", 2)(x, t)
-#f = functions.function("f", 2)(x, t)
+#x = lax.functions.variable("x")
+#t = lax.functions.variable("t")
+#u = lax.functions.function("u", 2)(x, t)
+#f = lax.functions.function("f", 2)(x, t)
 
-#L = add(multiply(functions.literal("-1"))(partial(x)(partial(x))), multiply(u))
-#A = add(multiply(functions.literal("-4"))(partial(x)(partial(x)(partial(x)))),multiply(functions.literal("3"))(add(multiply(u)(partial(x)), partial(x)(multiply(u)))))
+#L = add(multiply(lax.functions.literal("-1"))(partial(x)(partial(x))), multiply(u))
+#A = add(multiply(lax.functions.literal("-4"))(partial(x)(partial(x)(partial(x)))),multiply(lax.functions.literal("3"))(add(multiply(u)(partial(x)), partial(x)(multiply(u)))))
 
 #LAX = add(partial(t)(L), commutator(L, A))
 
