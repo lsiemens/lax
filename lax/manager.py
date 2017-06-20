@@ -32,8 +32,6 @@ class manager:
                 print("starting process: " + str(jobid))
                 fname = self.fname_base + str(jobid) + ".dat"
                 dname = self.fname_base + str(jobid) + ".stktrc"
-                print(fname)
-                print(dname)
                 process_seed = int(init_seed + jobid)
                 process = multiprocessing.Process(target=lax.lax.GenerateLaxHandler, args=(dname, ), kwargs={"fname":fname, "seed":process_seed})
                 self.jobs.append((process, jobid))
