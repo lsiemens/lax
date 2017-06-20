@@ -4,11 +4,12 @@ import lax
 
 import os
 import time
+import socket
 import multiprocessing
 
 class manager:
     def __init__(self, fname_base, processes=1, status_check=120):
-        self.fname_base = fname_base
+        self.fname_base = fname_base + "_host_" + socket.gethostname()
         self.processes = processes
         self.status_check = status_check
 
@@ -31,6 +32,8 @@ class manager:
                 print("starting process: " + str(jobid))
                 fname = self.fname_base + str(jobid) + ".dat"
                 dname = self.fname_base + str(jobid) + ".stktrc"
+                print(fname)
+                print(dname)
                 process_seed = int(init_seed + jobid)
                 process = multiprocessing.Process(target=lax.GenerateLaxHandler, args=(dname, ), kwargs={"fname":fname, "seed":process_seed})
                 self.jobs.append((process, jobid))
@@ -39,5 +42,5 @@ class manager:
 
             time.sleep(self.status_check)
 
-laxManager = manager("/data/lsiemens/NPDE_C4_large", 2)
-laxManager.start()
+#laxManager = manager("/data/lsiemens/NPDE_C4_large", 2)
+#laxManager.start()
