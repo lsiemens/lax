@@ -430,4 +430,184 @@ u(x, t)*u_0(x, t),
 f(x, t)*u_0(x, t) + f_0(x, t)*u(x, t);
 f(x, t)*u(x, t);
 u(x, t)*u_0(x, t)
+]PDEs found: [
+f_0(x, t);
+-f(x, t)*u(x, t)*u_1(x, t);
+-u(x, t)*u_01(x, t) - u_0(x, t)*u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+c1*c2*f(x, t)*u_0(x, t) + c1*c2*f_0(x, t)*u(x, t) + f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t);
+-(c1*c2*u_0(x, t) + u_1(x, t))*u(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+c1*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t));
+-c1*u(x, t)*u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+f(x, t)*u_0(x, t) + f_0(x, t)*u(x, t);
+-u(x, t)*u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+2*f_1(x, t);
+-2*u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t);
+-u(x, t)*u_1(x, t)
+]PDEs found: [
+f_0(x, t);
+c5*c6*f(x, t)*u(x, t);
+c5*c6*u_0(x, t),
+
+f_0(x, t);
+c5*c6*f(x, t)*u(x, t);
+c5*c6*u_0(x, t),
+
+f_0(x, t);
+c5*c6*f(x, t)*u(x, t);
+c5*c6*u_0(x, t),
+
+f_0(x, t);
+c5*c6*f(x, t)*u(x, t);
+c5*c6*u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t)**2;
+f_1(x, t);
+-2*u(x, t)*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+f_1(x, t);
+-2*u(x, t)*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+f_1(x, t);
+-2*u(x, t)*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+f_1(x, t);
+-2*u(x, t)*u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+f_0(x, t);
+-u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+c1*f_0(x, t);
+-c1*u_0(x, t),
+
+f(x, t)*u(x, t);
+c1*f_0(x, t);
+-c1*u_0(x, t),
+
+f(x, t)*u(x, t);
+c1*f_0(x, t);
+-c1*u_0(x, t),
+
+f(x, t)*u(x, t);
+c1*f_0(x, t);
+-c1*u_0(x, t),
+
+f(x, t)*u(x, t);
+c1*f_0(x, t);
+-c1*u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+f_1(x, t);
+-u_1(x, t),
+
+f(x, t)*u(x, t);
+f_1(x, t);
+-u_1(x, t),
+
+f(x, t)*u(x, t);
+f_1(x, t);
+-u_1(x, t),
+
+f(x, t)*u(x, t);
+f_1(x, t);
+-u_1(x, t)
+]PDEs found: [
+(u(x, t) + 2)*f_0(x, t);
+c2*f(x, t)*u(x, t);
+c2*(u(x, t) + 2)*u_0(x, t)
+]PDEs found: [
+(f(x, t)*u_0(x, t) + f_0(x, t)*u(x, t))*u(x, t);
+(c1*c2 + u(x, t)**4)*f(x, t)*u(x, t);
+(c1*c2 + 5*u(x, t)**4)*u(x, t)**2*u_0(x, t)
+]PDEs found: [
+f(x, t)*u_0(x, t);
+f(x, t)*u(x, t)**2 + f_0(x, t);
+-u_00(x, t),
+
+f(x, t)*u_0(x, t);
+f(x, t)*u(x, t)**2 + f_0(x, t);
+-u_00(x, t),
+
+f(x, t)*u_0(x, t);
+f(x, t)*u(x, t)**2 + f_0(x, t);
+-u_00(x, t)
+]PDEs found: [
+f(x, t)*u_0(x, t);
+f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t);
+-u(x, t)*u_01(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+2*f_1(x, t);
+-2*u_1(x, t)
+]PDEs found: [
+-f(x, t)*u(x, t)**2*u_0(x, t);
+f_1(x, t);
+(u(x, t)*u_01(x, t) + 2*u_0(x, t)*u_1(x, t))*u(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+c2*f_1(x, t);
+-c2*u_1(x, t)
+]PDEs found: [
+f_0(x, t);
+f(x, t)*u(x, t);
+u_0(x, t),
+
+f_0(x, t);
+f(x, t)*u(x, t);
+u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t)**2;
+c6*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t))*u(x, t);
+-2*c6*u(x, t)**3*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+c6*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t))*u(x, t);
+-2*c6*u(x, t)**3*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+c6*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t))*u(x, t);
+-2*c6*u(x, t)**3*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+c6*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t))*u(x, t);
+-2*c6*u(x, t)**3*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+c6*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t))*u(x, t);
+-2*c6*u(x, t)**3*u_1(x, t),
+
+f(x, t)*u(x, t)**2;
+c6*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t))*u(x, t);
+-2*c6*u(x, t)**3*u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+c1*f_1(x, t) + f(x, t)*u(x, t);
+-c1*u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+c1*c3*f(x, t)*u_1(x, t) + c1*c3*f_1(x, t)*u(x, t) + f_1(x, t);
+-(c1*c3*u(x, t) + 1)*u_1(x, t),
+
+f(x, t)*u(x, t);
+f_1(x, t);
+-u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+2*f_1(x, t);
+-2*u_1(x, t)
 ]
