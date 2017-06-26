@@ -1,0 +1,5 @@
+PDEs found: [
+f(x, t)*u(x, t);
+2*f_1(x, t);
+-2*u_1(x, t)
+]

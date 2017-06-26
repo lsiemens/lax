@@ -1,0 +1,13 @@
+PDEs found: [
+f_0(x, t);
+c4*c5*f(x, t)*u(x, t);
+c4*c5*u_0(x, t),
+
+f_0(x, t);
+c4*c5*f(x, t)*u(x, t);
+c4*c5*u_0(x, t),
+
+f_0(x, t);
+c4*c5*f(x, t)*u(x, t);
+c4*c5*u_0(x, t)
+]

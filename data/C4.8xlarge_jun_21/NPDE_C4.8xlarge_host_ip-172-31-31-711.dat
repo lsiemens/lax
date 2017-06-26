@@ -1,0 +1,5 @@
+PDEs found: [
+-f(x, t)*u_00(x, t) - 2*f_0(x, t)*u_0(x, t);
+f(x, t)*u(x, t);
+-2*u_0(x, t)**2
+]

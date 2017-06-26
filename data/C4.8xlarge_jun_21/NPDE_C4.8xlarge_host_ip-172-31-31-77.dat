@@ -1,0 +1,21 @@
+PDEs found: [
+f_0(x, t)*u(x, t);
+f(x, t)*u(x, t);
+u(x, t)*u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+f(x, t)*u_11(x, t) + f_1(x, t)*u_1(x, t);
+-u_1(x, t)**2,
+
+f(x, t)*u(x, t);
+f(x, t)*u_11(x, t) + f_1(x, t)*u_1(x, t);
+-u_1(x, t)**2
+]PDEs found: [
+f(x, t)*u(x, t);
+c3*f_1(x, t);
+-c3*u_1(x, t),
+
+f(x, t)*u(x, t);
+c3*f_1(x, t);
+-c3*u_1(x, t)
+]

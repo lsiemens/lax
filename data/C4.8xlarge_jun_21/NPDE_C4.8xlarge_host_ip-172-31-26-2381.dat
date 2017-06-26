@@ -1,0 +1,9 @@
+PDEs found: [
+f(x, t)*u(x, t);
+c1*f_0(x, t);
+-c1*u_0(x, t),
+
+f(x, t)*u(x, t);
+c1*f_0(x, t);
+-c1*u_0(x, t)
+]

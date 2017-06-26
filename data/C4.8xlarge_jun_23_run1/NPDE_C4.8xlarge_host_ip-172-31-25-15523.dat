@@ -1,0 +1,101 @@
+PDEs found: [
+f_0(x, t);
+f(x, t)*u(x, t) + f_001(x, t);
+u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t) + 2*f_0(x, t);
+f_1(x, t);
+-u_1(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+c2*c3*c4*c5*(f(x, t)*u_1(x, t) + f_1(x, t)*u(x, t));
+-c2*c3*c4*c5*u(x, t)*u_1(x, t)
+]PDEs found: [
+2*f(x, t)*u(x, t);
+c4*f(x, t)*u(x, t) + c4*f_1(x, t) + f_0(x, t)*u(x, t);
+-2*c4*u_1(x, t) - 2*u(x, t)*u_0(x, t),
+
+2*f(x, t)*u(x, t);
+c4*f(x, t)*u(x, t) + c4*f_1(x, t) + f_0(x, t)*u(x, t);
+-2*c4*u_1(x, t) - 2*u(x, t)*u_0(x, t),
+
+2*f(x, t)*u(x, t);
+c4*f(x, t)*u(x, t) + c4*f_1(x, t) + f_0(x, t)*u(x, t);
+-2*c4*u_1(x, t) - 2*u(x, t)*u_0(x, t),
+
+2*f(x, t)*u(x, t);
+f_0(x, t)*u(x, t);
+-2*u(x, t)*u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t);
+f_1(x, t);
+-u_1(x, t)
+]PDEs found: [
+-(f(x, t)*u_00(x, t) + f_0(x, t)*u_0(x, t))*u(x, t);
+f(x, t)*u(x, t);
+-u(x, t)*u_0(x, t)**2,
+
+-(f(x, t)*u_00(x, t) + f_0(x, t)*u_0(x, t))*u(x, t);
+f(x, t)*u(x, t);
+-u(x, t)*u_0(x, t)**2
+]PDEs found: [
+f(x, t)*u(x, t)**2;
+f_1(x, t);
+-2*u(x, t)*u_1(x, t)
+]PDEs found: [
+f(x, t)*u_0(x, t) + f_0(x, t)*u(x, t);
+-f(x, t)*u_1(x, t);
+-u(x, t)*u_01(x, t)
+]PDEs found: [
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t),
+
+f_0(x, t);
+(c7 + c8*u(x, t))*f(x, t)*u(x, t);
+(c7 + 2*c8*u(x, t))*u_0(x, t)
+]PDEs found: [
+f_0(x, t);
+f(x, t)*u(x, t) + f_1(x, t);
+u_0(x, t)
+]PDEs found: [
+f(x, t)*u(x, t)*u_0(x, t);
+c2*f_1(x, t);
+-c2*(u(x, t)*u_01(x, t) + u_0(x, t)*u_1(x, t))
+]PDEs found: [
+f_0(x, t);
+-f(x, t)*u_0(x, t);
+-u_00(x, t),
+
+f_0(x, t);
+-f(x, t)*u_0(x, t);
+-u_00(x, t)
+]

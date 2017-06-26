@@ -1,0 +1,13 @@
+PDEs found: [
+-2*f(x, t)*u(x, t)*u_0(x, t)*u_00(x, t);
+f_0(x, t) + f_1(x, t);
+2*u(x, t)*u_0(x, t)*u_000(x, t) + 2*u(x, t)*u_0(x, t)*u_001(x, t) + 2*u(x, t)*u_00(x, t)**2 + 2*u(x, t)*u_00(x, t)*u_01(x, t) + 2*u_0(x, t)**2*u_00(x, t) + 2*u_0(x, t)*u_00(x, t)*u_1(x, t),
+
+-2*f(x, t)*u(x, t)*u_0(x, t)*u_00(x, t);
+f_0(x, t) + f_1(x, t);
+2*u(x, t)*u_0(x, t)*u_000(x, t) + 2*u(x, t)*u_0(x, t)*u_001(x, t) + 2*u(x, t)*u_00(x, t)**2 + 2*u(x, t)*u_00(x, t)*u_01(x, t) + 2*u_0(x, t)**2*u_00(x, t) + 2*u_0(x, t)*u_00(x, t)*u_1(x, t)
+]PDEs found: [
+f(x, t)*u_0(x, t);
+f_1(x, t);
+-u_01(x, t)
+]

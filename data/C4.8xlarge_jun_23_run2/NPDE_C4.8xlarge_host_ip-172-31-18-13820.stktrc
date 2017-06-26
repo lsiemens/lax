@@ -1,0 +1,60 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/lax/lax.py", line 186, in GenerateLaxHandler
+    return GenerateLax(*args, **kwargs)
+  File "/usr/local/lib/python3.4/dist-packages/lax/lax.py", line 113, in __init__
+    self.findPairs()
+  File "/usr/local/lib/python3.4/dist-packages/lax/lax.py", line 130, in findPairs
+    laxpair = self.findLaxPair()
+  File "/usr/local/lib/python3.4/dist-packages/lax/lax.py", line 121, in findLaxPair
+    laxpair = LaxPair(L, A, self.constants, self.x, self.t, self.tout)
+  File "/usr/local/lib/python3.4/dist-packages/lax/lax.py", line 47, in __init__
+    LAXf = self._simplify(self.LAX(self.f).to_sympy())
+  File "/usr/local/lib/python3.4/dist-packages/lax/lax.py", line 85, in _simplify
+    return sympy.simplify(sympy.expand(expression))
+  File "/usr/local/lib/python3.4/dist-packages/sympy/simplify/simplify.py", line 545, in simplify
+    _e = cancel(expr)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/polytools.py", line 6361, in cancel
+    c, P, Q = F.cancel(G)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/polytools.py", line 3547, in cancel
+    result = F.cancel(G, include=include)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/polyclasses.py", line 679, in cancel
+    cF, cG, F, G = dmp_cancel(F, G, lev, dom, include=False)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/euclidtools.py", line 1874, in dmp_cancel
+    _, p, q = dmp_inner_gcd(f, g, u, K)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/euclidtools.py", line 1591, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/euclidtools.py", line 1539, in _dmp_inner_gcd
+    f = dmp_convert(f, u, K, exact)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in dmp_convert
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in <listcomp>
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in dmp_convert
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in <listcomp>
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in dmp_convert
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in <listcomp>
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in dmp_convert
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 570, in <listcomp>
+    return dmp_strip([ dmp_convert(c, v, K0, K1) for c in f ], u)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 564, in dmp_convert
+    return dup_convert(f, K0, K1)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 541, in dup_convert
+    return dup_strip([ K1.convert(c, K0) for c in f ])
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/densebasic.py", line 541, in <listcomp>
+    return dup_strip([ K1.convert(c, K0) for c in f ])
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/domains/domain.py", line 97, in convert
+    return self.convert_from(element, base)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/domains/domain.py", line 87, in convert_from
+    result = _convert(element, base)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/domains/pythonrationalfield.py", line 62, in from_RealField
+    p, q = K0.to_rational(a)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/domains/realfield.py", line 100, in to_rational
+    return self._context.to_rational(element, limit)
+  File "/usr/local/lib/python3.4/dist-packages/sympy/polys/domains/mpelements.py", line 139, in to_rational
+    k = (ctx.max_denom - q0)//q1
+ZeroDivisionError: integer division or modulo by zero
