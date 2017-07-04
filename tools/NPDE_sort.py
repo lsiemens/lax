@@ -73,14 +73,27 @@ class dataFile:
                 continue
             i += 1
 
-def NPDE_sort(source, target):
+def NPDE_sort(source, target, duplicates):
     data = dataFile(source)
-    for item in data.data:
-        item.weight = item.NPDE*item.multiplicative
+    temp_data = []
+    if duplicates:
+        for item in data.data:
+            item.weight = item.NPDE*item.multiplicative
+    else:
+        for item in data.data:
+            if not any([True if temp_item.data == item.data else False for temp_item in temp_data]):
+                item.weight = item.NPDE*item.multiplicative
+                temp_data.append(item)
+        data.data = temp_data
+
     data.data.sort(key=lambda x: x.weight)
     data.write_file(target)
 
 if __name__ == "__main__":
+    duplicates = True
     if len(sys.argv) < 3:
         raise RuntimeError("Wrong number of arguments.\nExample: NPDE_sort \"source\" \"target\"")
-    NPDE_sort(sys.argv[1], sys.argv[2])
+    if len(sys.argv) > 3:
+        if sys.argv[3] == "-d":
+            duplicates = False
+    NPDE_sort(sys.argv[1], sys.argv[2], duplicates)
