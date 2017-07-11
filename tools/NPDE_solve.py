@@ -2,6 +2,16 @@ from matplotlib import pyplot
 import numpy
 
 class solver:
+    """ 
+    2D partial differential equation solver. This solver is designed to work for
+    PDEs including Non-linear PDEs with or without mixed partials. The PDE must
+    be put in the form of a system of first order equations, U=[u, u_y, u_yy, . . . ].
+    
+    When the highest order terms in y contain mixed derivatives, then u_(yy . . . )
+    can be solved for by integrating the system V=[v, v_x, v_xx, . . . ] where
+    v = u_(yy . . . ). The method integrate_x is used for this purpose.
+    """
+    
     def __init__(self, x0, x1, xres, y0, y1, yres, substepx=1, substepy=1):
         """ 
         2D partial differential equation solver.
@@ -33,6 +43,9 @@ class solver:
         self.y1 = y1
         self.yres = yres
         self.substepy = substepy
+        self.derivative_algorithm = 1
+        self.integrate_y_algorithm = 1
+        self.integrate_x_algorithm = 1
         
         #format self.data[x][y]
         self.x = numpy.linspace(self.x0, self.x1, self.xres*self.substepx, True)
@@ -47,14 +60,16 @@ class solver:
 
     def solve(self, initalization_callback, function_callback):
         """ 
-        Solve the NPDE (d/dt)U(x, t) = function_callback(x, t, U).
+        Solve the NPDE (d/dy)U(x, y) = function_callback(x, y, U).
         
         Parameters
         ----------
         initalization_callback : function(self)
-            This function initalizes the solvers self.U array and takes the solver instance as the argument self.
+            This function initalizes the solvers self.U array and takes the
+            solver instance as the argument self.
         function_callback : function(self, array x, float y, ndarray U)
-            This function defines the system of equations (d/dt)U(x, t, U). The returned array must have the shape (n, self.xres*self.substepx) where n >= 1.
+            This function defines (d/dy)U(x, y, U). The returned array must have
+            the shape (n, self.xres*self.substepx) where n >= 1.
         """
         initalization_callback(self)
         self.data[:, 0] = self.U[0, ::self.substepx]
@@ -73,31 +88,70 @@ class solver:
         profile : ndarray
             The profile to differentiate.
         """
-#        output = -(numpy.roll(profile, 1) - numpy.roll(profile, -1))/(2*self.dx)
-        output = -(-numpy.roll(profile, 2) + 8*numpy.roll(profile, 1) - 8*numpy.roll(profile, -1) + numpy.roll(profile, -2))/(12*self.dx)
-        return output
+        if self.derivative_algorithm == 0:
+            return -(numpy.roll(profile, 1) - numpy.roll(profile, -1))/(2*self.dx)
+        else:
+            return -(-numpy.roll(profile, 2) + 8*numpy.roll(profile, 1) - 8*numpy.roll(profile, -1) + numpy.roll(profile, -2))/(12*self.dx)
 
     def integrate_y(self, y, U, function_callback):
-        output = U + function_callback(self, self.x, y, U)*self.dy
-#        k1 = function_callback(self, self.x, y, U)
-#        k2 = function_callback(self, self.x, y + self.dy/2, U + k1*self.dy/2)
-#        k3 = function_callback(self, self.x, y + self.dy/2, U + k2*self.dy/2)
-#        k4 = function_callback(self, self.x, y + self.dy, U + k3*self.dy)
-#        output = U + (k1 + 2*k2 + 2*k3 + k4)*self.dy/6
-        return output
+        """ 
+        Integrate one step along y using the equation (d/dy)U(x, y) = function_callback(x, y, U).
+        
+        Parameters
+        ----------
+        y : float
+            The current y position.
+        U : ndarray
+            The inital value of U.
+        function_callback : function(self, array x, float y, ndarray U)
+            This function defines (d/dy)U(x, y, U). The returned array must have
+            the shape (n, self.xres*self.substepx) where n >= 1.
+        """
+        if self.integrate_y_algorithm == 0:
+            return U + function_callback(self, self.x, y, U)*self.dy
+        else:
+            k1 = function_callback(self, self.x, y, U)
+            k2 = function_callback(self, self.x, y + self.dy/2, U + k1*self.dy/2)
+            k3 = function_callback(self, self.x, y + self.dy/2, U + k2*self.dy/2)
+            k4 = function_callback(self, self.x, y + self.dy, U + k3*self.dy)
+            return U + (k1 + 2*k2 + 2*k3 + k4)*self.dy/6
 
     def integrate_x(self, y, inital_value, U, function_callback, *args):
+        """ 
+        Integrate along x using the equation (d/dx)V(x, y, U) = function_callback(x, y, U, V, args)
+        
+        Parameters
+        ----------
+        y : float
+            The current y position.
+        inital_value : array
+            The value of V(self.x0, y, U(self.x0, y))
+        U : ndarray
+            The vector U(x, y).
+        function_callback : function(self, float x, float y, array U, array V, list *args)
+            This function defines (d/dx)V(x, y, U). The argument U accepts a slice
+            of the ndarray U[:, i]. The argument args is used to pass a list of
+            derived quantities that cannot be computed with in the function such
+            at U_x(x, y). The returned array must have the shape (n,) where n >= 1.
+        args : list
+            A list of derived derived quantities, each quantity should have the
+            shape (n, self.xres*self.substepx) where n >= 1.
+        """
         output = numpy.zeros((len(inital_value), self.xres*self.substepx))
         output[:, 0] = inital_value
-        for i in range(1, self.xres*self.substepx):
-            x = self.x0 + self.dx*i
-            output[:, i] = output[:, i - 1] + function_callback(self, x, y, U[:, i - 1], output[:, i - 1], *[arg[:, i - 1] for arg in args])*self.dx
-            # warning Assuming U[] and args[] are constant along x
-#            k1 = function_callback(self, x, y, U[:, i - 1], output[:, i - 1], *[arg[:, i - 1] for arg in args])
-#            k2 = function_callback(self, x + self.dx/2, y, U[:, i - 1], output[:, i - 1] + k1*self.dx/2, *[arg[:, i - 1] for arg in args])
-#            k3 = function_callback(self, x + self.dx/2, y, U[:, i - 1], output[:, i - 1] + k2*self.dx/2, *[arg[:, i - 1] for arg in args])
-#            k4 = function_callback(self, x + self.dx, y, U[:, i - 1], output[:, i - 1] + k3*self.dx, *[arg[:, i - 1] for arg in args])
-#            output[:, i] = output[:, i - 1] + (k1 + 2*k2 + 2*k3 + k4)*self.dx/6
+        if self.integrate_x_algorithm == 0:
+            for i in range(1, self.xres*self.substepx):
+                x = self.x0 + self.dx*i
+                output[:, i] = output[:, i - 1] + function_callback(self, x, y, U[:, i - 1], output[:, i - 1], *[arg[:, i - 1] for arg in args])*self.dx
+        else:
+            for i in range(1, self.xres*self.substepx):
+                x = self.x0 + self.dx*i
+                # warning Assuming U[] and args[] are constant along x
+                k1 = function_callback(self, x, y, U[:, i - 1], output[:, i - 1], *[arg[:, i - 1] for arg in args])
+                k2 = function_callback(self, x + self.dx/2, y, U[:, i - 1], output[:, i - 1] + k1*self.dx/2, *[arg[:, i - 1] for arg in args])
+                k3 = function_callback(self, x + self.dx/2, y, U[:, i - 1], output[:, i - 1] + k2*self.dx/2, *[arg[:, i - 1] for arg in args])
+                k4 = function_callback(self, x + self.dx, y, U[:, i - 1], output[:, i - 1] + k3*self.dx, *[arg[:, i - 1] for arg in args])
+                output[:, i] = output[:, i - 1] + (k1 + 2*k2 + 2*k3 + k4)*self.dx/6
         return output
 
 def init(self):
@@ -139,11 +193,11 @@ def func(self, x, y, U):
     return output
 
 A = solver(-3, 3, 200, 0, 4, 200, 2, 4)
-A.solve(init, func)
+#A.solve(init, func)
 
-pyplot.plot(A.axis[0], A.data[:, 0])
-pyplot.show()
+#pyplot.plot(A.axis[0], A.data[:, 0])
+#pyplot.show()
 #pyplot.imshow(A.data[::1, ::1], clim=(-1, 1))
 #pyplot.show()
-pyplot.imshow(A.data)
-pyplot.show()
+#pyplot.imshow(A.data)
+#pyplot.show()
